@@ -7,13 +7,24 @@ import { FaBell } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
 import './Navbar.css'
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-function Navbar() {
+function Navbar({setSideNavbarFunc, sideNavbar}) {
     const [userPic, setUserPic] = useState("https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg");
     const [navbarModal, setNavbarModal] = useState(false)
 
+    const navigate = useNavigate()
+
+    function handleprofile(){
+        navigate('/user/456');
+        setNavbarModal(false)
+    }
+
     function handleClick(){
       setNavbarModal(prev=>!prev)  
+    }
+    const sideNavbarFunc = () => {
+        setSideNavbarFunc(!sideNavbar)
     }
 
     return (
@@ -21,13 +32,13 @@ function Navbar() {
         <div className="navbar">
             {/* Left Navbar */}
             <div className="navbar-left">
-                <div className="navbarHamberger">
+                <div className="navbarHamberger" onClick={sideNavbarFunc} >
                     <MdOutlineMenu style={{ color: "white", fontSize: "24px" }}/>
                 </div>  
-                <div className="navbar_youtubeImg">
+                <Link to={'/'} className="navbar_youtubeImg">
                     <IoLogoYoutube style={{fontSize: "34px"}} className="navbar_youtubeImage"/>
                     <div className="navbar_utubeTitle">Youtube</div>
-                </div>              
+                </Link>              
             </div>
 
             {/* Middle Navbar */}
@@ -52,7 +63,7 @@ function Navbar() {
 
                 { navbarModal && 
                     <div className="navbar-modal">
-                        <div className="navbar-modal-option">Profile</div>
+                        <div className="navbar-modal-option" onClick={handleprofile} >Profile</div>
                         <div className="navbar-modal-option">Logout</div>
                         <div className="navbar-modal-option">Login</div>
                     </div>
