@@ -8,10 +8,14 @@ import { IoPersonSharp } from "react-icons/io5";
 import './Navbar.css'
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Login from "./Login";
 
 function Navbar({setSideNavbarFunc, sideNavbar}) {
     const [userPic, setUserPic] = useState("https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg");
     const [navbarModal, setNavbarModal] = useState(false)
+    const [login, setLogin] = useState(false)
+
+    const hasChannel = localStorage.getItem("channel");
 
     const navigate = useNavigate()
 
@@ -26,6 +30,22 @@ function Navbar({setSideNavbarFunc, sideNavbar}) {
     const sideNavbarFunc = () => {
         setSideNavbarFunc(!sideNavbar)
     }
+
+    const onclickOfPopUpOption = (button) => {
+        setNavbarModal(false)
+        if(button == "login"){
+            setLogin(true)
+        }
+        else{
+
+        }
+    }
+
+    const setLoginModal = () => {
+        setLogin(false)
+    }
+
+    const [search, setSearch] = useState("");
 
     return (
         <>
@@ -45,6 +65,7 @@ function Navbar({setSideNavbarFunc, sideNavbar}) {
             <div className="navbar-middle">
                 <div className="navbar_searchBox">
                     <input type="text" placeholder="Search" className="navbar_searchBoxInput" />
+        
                     <div className="navbar_searchIconBox">
                         <IoSearchSharp style={{fontSize: "28px", color: "white"}}/>
                     </div>
@@ -57,18 +78,33 @@ function Navbar({setSideNavbarFunc, sideNavbar}) {
             {/* Right Navbar */}
 
             <div className="navbar-right">
-                <MdVideoCall style={{ fontSize: "30px", cursor: "pointer", color: "white"}}/>
+                <Link to={'/455/upload'}>
+                  <MdVideoCall style={{ fontSize: "30px", cursor: "pointer", color: "white"}}/>
+                </Link>
+                
                 <FaBell style={{ fontSize: "30px", cursor: "pointer", color: "white"}}/> 
                 <img onClick={handleClick} src={userPic} alt="Logo" className="navbar-right-logo" /> 
 
                 { navbarModal && 
                     <div className="navbar-modal">
                         <div className="navbar-modal-option" onClick={handleprofile} >Profile</div>
-                        <div className="navbar-modal-option">Logout</div>
-                        <div className="navbar-modal-option">Login</div>
+                        <div className="navbar-modal-option">
+                            {hasChannel ? (
+                                <Link to="/channel" className="channelButton">View Channel</Link>
+                            ) : (
+                                <Link to="/create-channel" className="channelButton">Create Your Channel</Link>
+                            )}
+                        </div>
+                        <div className="navbar-modal-option" onClick={()=>onclickOfPopUpOption("logout")} >Logout</div>
+                        <div className="navbar-modal-option" onClick={()=>onclickOfPopUpOption("login")} >Login</div>
+                        
                     </div>
                 }
             </div>
+
+            {
+                login && <Login setLoginModal={setLoginModal} />
+            }
         </div>
         </>
     )

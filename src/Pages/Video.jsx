@@ -1,12 +1,28 @@
+import { useEffect, useState } from 'react';
 import './Video.css'
 import { PiThumbsUp } from "react-icons/pi";
 import { PiThumbsDown } from "react-icons/pi";
 import { Link } from 'react-router-dom';
+import SideNavbar from '../Components/sideNavbar';
 
-function Video(){
+function Video({sideNavbar}){
+
+    const [message, setMessage] = useState("")
+    console.log(message);
+    const [likes, setLikes] = useState(32);
+    const [dislikes, setDislikes] = useState(5);
+
+    const [comments, setComments] = useState([
+        { id: 1, user: "User1", text: "This Video is very Helpful", date: "2025-07-05" },
+        { id: 2, user: "User2", text: "Nice tutorial", date: "2025-07-06" }
+    ]);
+    const [editId, setEditId] = useState(null);
+  
     return (
         <>
         <div className="video">
+            <SideNavbar sideNavbar={sideNavbar} />
+            
             <div className="videoPostSection">
                 <div className="video_youtube">
                     <video width="400px" controls autoPlay className='video_youtube_video'>
@@ -33,16 +49,16 @@ function Video(){
                         </div>
 
                         <div className="youtube_video_likeBlock">
-                            <div className="youtube_video_likeBlock_Like">
-                                <PiThumbsUp />
-                                <div className="youtube_video_likeBlock_NoOfLikes">{32}</div>
+                            <div onClick={()=>setLikes(likes + 1)} className="youtube_video_likeBlock_Like">
+                                <PiThumbsUp /> 
+                                <div className="youtube_video_likeBlock_NoOfLikes">{likes}</div>
                             </div>
 
                             <div className="youtubeVideoDivider"></div>
 
-                            <div className="youtube_video_likeBlock_Like">
+                            <div onClick={()=>setDislikes(dislikes + 1)} className="youtube_video_likeBlock_Like">
                                 <PiThumbsDown />
-                                <div className="youtube_video_likeBlock_NoOfLikes">{5}</div>
+                                <div className="youtube_video_likeBlock_NoOfLikes">{dislikes}</div>
                             </div>
 
                         </div>
@@ -58,7 +74,7 @@ function Video(){
                         <div className="youtubeSelfComment">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAXY8gIvEv1r4pNE58b3xTXVP9QIMAoM4YIg&s" alt="Profile Image" className="video_youtubeSelfCommentProfile" />
                             <div className="addAComment">
-                                <input type="text" className="addAcommentInput" placeholder='Add a Comment' />
+                                <input type="text" value={message} onChange={(e)=> {setMessage(e.target.value)}} className="addAcommentInput" placeholder='Add a Comment' />
                                 <div className="cancelSubmitComment">
                                     <div className="cancelComment">Cancel</div>
                                     <div className="cancelComment">Comment</div>
@@ -68,7 +84,7 @@ function Video(){
                         </div>
 
                         <div className="youtubeOthersComments">
-                            <div className="youtubeSelfComment">
+                            {/* <div className="youtubeSelfComment">
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAXY8gIvEv1r4pNE58b3xTXVP9QIMAoM4YIg&s" alt="Profile Image" className="video_youtubeSelfCommentProfile" />
                                 <div className="others_commentSection">
                                     <div className="others_commentSectionHeader">
@@ -89,8 +105,40 @@ function Video(){
                                     </div>
 
                                     <div className="otherCommentSectionComment">This Video is very Helpful</div>
-                                </div>
-                            </div>
+                                </div> */}
+                            {/* </div> */}
+
+                            {comments.map(comment => (
+  <div className="youtubeSelfComment" key={comment.id}>
+    <img src="..." className="video_youtubeSelfCommentProfile" />
+    <div className="others_commentSection">
+      <div className="others_commentSectionHeader">
+        <div className="channelName_comment">{comment.user}</div>
+        <div className="commentTimingOthers">{comment.date}</div>
+      </div>
+
+      {editId === comment.id ? (
+        <input 
+          type="text" 
+          value={comment.text} 
+          onChange={(e) => {
+            const updated = comments.map(c => 
+              c.id === comment.id ? { ...c, text: e.target.value } : c
+            );
+            setComments(updated);
+          }}
+        />
+      ) : (
+        <div className="otherCommentSectionComment">{comment.text}</div>
+      )}
+
+      <div className="commentActions">
+        <button onClick={() => setEditId(editId === comment.id ? null : comment.id)}>Edit</button>
+        <button onClick={() => setComments(comments.filter(c => c.id !== comment.id))}>Delete</button>
+      </div>
+    </div>
+  </div>
+))}
 
                             <div className="youtubeSelfComment">
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAXY8gIvEv1r4pNE58b3xTXVP9QIMAoM4YIg&s" alt="Profile Image" className="video_youtubeSelfCommentProfile" />

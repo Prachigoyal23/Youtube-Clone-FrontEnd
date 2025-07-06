@@ -43,6 +43,8 @@
 .home_sideNavbarTopOptionTitle{
     font-size: 14px;
     font-weight: 450;
+    color: white;
+    text-decoration: none;
 }
 .home_sideNavbarMiddle{
     display: flex;

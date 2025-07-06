@@ -5,6 +5,11 @@ import Video from './Pages/Video';
 import Profile from './Pages/Profile';
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import VideoUpload from './Pages/VideoUpload';
+import SignUp from './Pages/SignUp';
+// import Channel from './Pages/Channel';
+import CreateChannel from './Pages/CreateChannel';
+import ViewChannel from './Pages/ViewChannel';
 
 function App () {
 
@@ -19,8 +24,12 @@ function App () {
     <Navbar setSideNavbarFunc={setSideNavbarFunc} sideNavbar={sideNavbar} />
     <Routes>
       <Route path='/' element={<Home sideNavbar={sideNavbar} />} />
-      <Route path='/watch/:id' element={<Video  />}></Route>
+      <Route path='/watch/:id' element={<Video sideNavbar={sideNavbar} />}></Route>
       <Route path='/user/:id' element={<Profile sideNavbar={sideNavbar} />} ></Route>
+      <Route path='/:id/upload' element={<VideoUpload/>} ></Route>
+      <Route path='/signup' element={<SignUp/>}></Route>
+      <Route path="/create-channel" element={<CreateChannel />} />
+      <Route path="/channel" element={<ViewChannel />} />
     </Routes>
     </div>
   )

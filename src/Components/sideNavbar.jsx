@@ -10,6 +10,7 @@ import { PiVideoFill } from "react-icons/pi";
 import { FaRegThumbsUp } from "react-icons/fa6";
 import { FaScissors } from "react-icons/fa6";
 import './sideNavbar.css'
+import { Link } from "react-router-dom";
 
 function SideNavbar({sideNavbar}){
     return (
@@ -17,8 +18,8 @@ function SideNavbar({sideNavbar}){
         <div className={sideNavbar? "home-sideNavbar" : "homeSideNavbarHide"}>
             <div className="home_sideNavbarTop">
                 <div className={`home_sideNavbarTopOption`}>
-                    <MdHome />
-                    <div className="home_sideNavbarTopOptionTitle">Home</div>
+                    <MdHome/>
+                    <Link to={'/'} className="home_sideNavbarTopOptionTitle">Home</Link>
                 </div>
 
                  <div className={`home_sideNavbarTopOption`}>

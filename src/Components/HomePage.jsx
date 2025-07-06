@@ -1,10 +1,12 @@
+import { useState } from 'react';
 import './Homepage.css';
 import { Link } from 'react-router-dom';
 
+
 function HomePage({sideNavbar}){
 
-    const options = ["All", "Twenty20 Cricket", "Music", "Live", "Mixes", "Gaming", "Debates", "Coke Studio Pakistan", "Democracy", "Pakistani dramas", "Comedy", "Pakistani dramas", "Comedy", "Pakistani dramas", "Comedy",];
-    // const options = ["All", "JavaScript", "React", "MongoDB", "MERN Stack", "Web Development", "HTML", "CSS", "Nodejs", "Expressjs", "FrontEnd", "BackEnd", "Fullstack Development", "Poetry"];
+    // const options = ["All", "Twenty20 Cricket", "Music", "Live", "Mixes", "Gaming", "Debates", "Coke Studio Pakistan", "Democracy", "Pakistani dramas", "Comedy", "Pakistani dramas", "Comedy", "Pakistani dramas", "Comedy",];
+    const options = ["All", "JavaScript", "React", "MongoDB", "MERN Stack", "Web Development", "HTML", "CSS", "Nodejs", "Expressjs", "FrontEnd", "BackEnd", "Fullstack Development", "Poetry"];
     return (
         <>
         <div className={sideNavbar? "homePage" : "fullHomePage"}>
@@ -18,6 +20,7 @@ function HomePage({sideNavbar}){
                 }
                 
             </div>
+
 
             <div className={sideNavbar? "home_mainPage": "home_mainPageWithoutLink"}>
 
