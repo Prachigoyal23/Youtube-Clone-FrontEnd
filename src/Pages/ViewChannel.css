@@ -1,66 +1,112 @@
-/* // src/Pages/Channel.js */
-import { useState, useEffect } from 'react';
-/* import './Channel.css'; */
-
-function Channel() {
-  const [channel, setChannel] = useState(null);
-  const [videos, setVideos] = useState([]);
-  const [newVideo, setNewVideo] = useState({ title: '', url: '', views: 0 });
-
-  useEffect(() => {
-    const savedChannel = JSON.parse(localStorage.getItem('channel'));
-    const savedVideos = JSON.parse(localStorage.getItem('channelVideos')) || [];
-    setChannel(savedChannel);
-    setVideos(savedVideos);
-  }, []);
-
-  const handleAddVideo = () => {
-    const updatedVideos = [...videos, { ...newVideo, id: Date.now() }];
-    setVideos(updatedVideos);
-    localStorage.setItem('channelVideos', JSON.stringify(updatedVideos));
-    setNewVideo({ title: '', url: '', views: 0 });
-  };
-
-  const deleteVideo = (id) => {
-    const updated = videos.filter(v => v.id !== id);
-    setVideos(updated);
-    localStorage.setItem('channelVideos', JSON.stringify(updated));
-  };
-
-  const updateVideo = (id, updatedFields) => {
-    const updated = videos.map(v => v.id === id ? { ...v, ...updatedFields } : v);
-    setVideos(updated);
-    localStorage.setItem('channelVideos', JSON.stringify(updated));
-  };
-
-  return (
-    <div className="channelPage">
-      <h2>{channel?.name}</h2>
-      <p>{channel?.description}</p>
-
-      <div className="addVideoForm">
-        <input type="text" placeholder="Video Title" value={newVideo.title} onChange={(e) => setNewVideo({ ...newVideo, title: e.target.value })} />
-        <input type="text" placeholder="Video URL" value={newVideo.url} onChange={(e) => setNewVideo({ ...newVideo, url: e.target.value })} />
-        <button onClick={handleAddVideo}>Add Video</button>
-      </div>
-
-      <div className="videoList">
-        {videos.map(video => (
-          <div key={video.id} className="videoCard">
-            <video src={video.url} controls width="320" />
-            <h4>{video.title}</h4>
-            <p>{video.views} views</p>
-            <button onClick={() => deleteVideo(video.id)}>Delete</button>
-            <button onClick={() => {
-              const newTitle = prompt("New title:", video.title);
-              if (newTitle) updateVideo(video.id, { title: newTitle });
-            }}>Edit</button>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+.channelPage {
+    margin-top: 56px;
+    background-color: black;
+    color: white;
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Oswald", sans-serif;
 }
 
-export default Channel;
+.channelPage h2 {
+    font-size: 36px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
 
+.channelPage p {
+    font-size: 18px;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.addVideoForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 40%;
+    margin-bottom: 40px;
+}
+
+.addVideoForm input {
+    height: 45px;
+    padding: 0 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #222;
+    color: white;
+    font-size: 16px;
+}
+
+.addVideoForm button {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.addVideoForm button:hover {
+    background-color: white;
+    color: black;
+}
+
+.videoList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.videoCard {
+    background-color: #1e1e1e;
+    padding: 15px;
+    border-radius: 10px;
+    width: 320px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.videoCard video {
+    border-radius: 8px;
+}
+
+.videoCard h4 {
+    font-size: 18px;
+    margin: 5px 0;
+    text-align: center;
+}
+
+.videoCard p {
+    color: #aaa;
+    margin: 0;
+    font-size: 14px;
+}
+
+.videoCard button {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: all 0.3s ease;
+}
+
+.videoCard button:hover {
+    background-color: white;
+    color: black;
+}

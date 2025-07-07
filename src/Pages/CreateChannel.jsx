@@ -1,6 +1,6 @@
 // src/Pages/CreateChannel.js
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './CreateChannel.css';
 
 
@@ -24,8 +24,13 @@ function CreateChannel() {
       <h2>Create Your Channel</h2>
       <form onSubmit={handleSubmit} className="channelForm">
         <input type="text" name="name" placeholder="Channel Name" onChange={handleChange} required />
-        <textarea name="description" placeholder="Channel Description" onChange={handleChange} required />
-        <button type="submit">Create Channel</button>
+        <input type="email" name="Handle" placeholder="Handle's Email" onChange={handleChange} required />
+        
+        <div className="buttonGroup">
+          <button><Link to={'/'}>Cancel</Link></button>
+          <button type="submit">Create Channel</button>
+        </div>
+        
       </form>
     </div>
   );

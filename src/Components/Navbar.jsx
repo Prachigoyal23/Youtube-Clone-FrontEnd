@@ -24,6 +24,10 @@ function Navbar({setSideNavbarFunc, sideNavbar}) {
         setNavbarModal(false)
     }
 
+    function channelProfile(){
+        setNavbarModal(false)
+    }
+
     function handleClick(){
       setNavbarModal(prev=>!prev)  
     }
@@ -88,7 +92,7 @@ function Navbar({setSideNavbarFunc, sideNavbar}) {
                 { navbarModal && 
                     <div className="navbar-modal">
                         <div className="navbar-modal-option" onClick={handleprofile} >Profile</div>
-                        <div className="navbar-modal-option">
+                        <div className="navbar-modal-option" onClick={channelProfile} >
                             {hasChannel ? (
                                 <Link to="/channel" className="channelButton">View Channel</Link>
                             ) : (

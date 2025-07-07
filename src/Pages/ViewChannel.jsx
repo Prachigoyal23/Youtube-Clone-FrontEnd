@@ -1,7 +1,7 @@
-// src/Pages/Channel.js
+
 import { useState, useEffect } from 'react';
 import SideNavbar from '../Components/sideNavbar';
-// import './ViewChannel.css';
+import './ViewChannel.css';
 
 function ViewChannel() {
   const [channel, setChannel] = useState(null);
