@@ -72,7 +72,6 @@ export const loginUser = async (req, res) => {
   if (!email) return res.status(400).json({ error: 'Email is required' });
   if (!password) return res.status(400).json({ error: 'Password is required' });
 
-
   try {
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ error: 'User not found' });

@@ -7,10 +7,10 @@ import { FaBell } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
 import './Navbar.css'
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Login from "./Login";
 
-function Navbar({setSideNavbarFunc, sideNavbar}) {
+function Navbar({setSideNavbarFunc, sideNavbar, setSearchText}) {
     const [userPic, setUserPic] = useState("https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg");
     const [navbarModal, setNavbarModal] = useState(false)
     const [login, setLogin] = useState(false)
@@ -18,6 +18,14 @@ function Navbar({setSideNavbarFunc, sideNavbar}) {
     const hasChannel = localStorage.getItem("channel");
 
     const navigate = useNavigate()
+
+    const handleSearchSubmit = () => {
+    if (search.trim() !== "") {
+        navigate(`/search?q=${encodeURIComponent(search.trim())}`);
+        setSearch("");
+    }
+}
+
 
     function handleprofile(){
         navigate('/user/456');
@@ -68,9 +76,20 @@ function Navbar({setSideNavbarFunc, sideNavbar}) {
             {/* Middle Navbar */}
             <div className="navbar-middle">
                 <div className="navbar_searchBox">
-                    <input type="text" placeholder="Search" className="navbar_searchBoxInput" />
+                    <input 
+                        type="text"
+                        placeholder="Search"
+                        className="navbar_searchBoxInput"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            handleSearchSubmit();
+                        }
+                        }}
+                    />
         
-                    <div className="navbar_searchIconBox">
+                    <div className="navbar_searchIconBox" onClick={handleSearchSubmit} >
                         <IoSearchSharp style={{fontSize: "28px", color: "white"}}/>
                     </div>
                 </div>

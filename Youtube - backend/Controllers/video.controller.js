@@ -30,7 +30,17 @@ export const uploadVideo = async (req, res) => {
     channelId
   } = req.body;
 
+  if (!videoId) return res.status(400).json({ error: 'videoId is required' });
+  if (!title) return res.status(400).json({ error: 'Title is required' });
+  if (!thumbnailUrl) return res.status(400).json({ error: 'Thumbnail URL is required' });
+  if (!description) return res.status(400).json({ error: 'Description is required' });
+  if (!channelId) return res.status(400).json({ error: 'Channel ID is required' });
+
+
   try {
+    const channel = await Channel.findById(channelId);
+    if (!channel) return res.status(404).json({ error: 'Channel not found' });
+    
     const newVideo = await Video.create({
       videoId,
       title,
