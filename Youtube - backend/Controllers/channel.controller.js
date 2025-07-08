@@ -4,6 +4,9 @@ import User from '../Models/User.model.js';
 export const createChannel = async (req, res) => {
   const { channelName, description, channelBanner } = req.body;
 
+   if (!channelName) return res.status(400).json({ error: 'Channel name is required' });
+   if (!description) return res.status(400).json({ error: 'Description is required' });
+
   try {
     const channel = await Channel.create({
       channelName,
