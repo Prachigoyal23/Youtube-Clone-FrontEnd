@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
 const authMiddleware = (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
@@ -14,3 +15,4 @@ const authMiddleware = (req, res, next) => {
 };
 
 export default authMiddleware;
+

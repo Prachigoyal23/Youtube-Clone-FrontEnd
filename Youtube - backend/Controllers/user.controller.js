@@ -1,6 +1,7 @@
 import User from '../Models/User.model.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
 // Inline utility function (local to this file)
 const isStrongPassword = (password) => {
@@ -9,7 +10,7 @@ const isStrongPassword = (password) => {
 };
 
 export const registerUser = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, avatar } = req.body;
 
    if (!username) return res.status(400).json({ error: 'Username is required' });
    if (!email) return res.status(400).json({ error: 'Email is required' });
@@ -31,9 +32,10 @@ export const registerUser = async (req, res) => {
   try {
     // Check if email already exists
     const existingUser = await User.findOne({ email });
-    if (existingUser)
+    if (existingUser){
       return res.status(400).json({ error: 'Email already in use' });
-
+    }
+      
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -41,10 +43,27 @@ export const registerUser = async (req, res) => {
     const newUser = await User.create({
       username,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      avatar: avatar || undefined
     });
 
-    res.status(201).json({ message: 'User registered successfully' });
+    // await newUser.save();
+
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: '1d'
+    });
+
+    res.status(201).json({
+      token, 
+      user: {
+        username: newUser.username,
+        id: newUser._id,
+        avatar: newUser.avatar,
+        email: newUser.email,
+        }
+     });
+
+    // res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     console.error('Registration error:', error);
     res.status(500).json({ error: 'Server error during registration' });
