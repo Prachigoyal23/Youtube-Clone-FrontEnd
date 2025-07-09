@@ -17,6 +17,39 @@ function Video({sideNavbar}){
         { id: 2, user: "User2", text: "Nice tutorial", date: "2025-07-06" }
     ]);
     const [editId, setEditId] = useState(null);
+
+    const [userReaction, setUserReaction] = useState(null);
+
+    const handleLike = () => {
+    if (userReaction === 'like') {
+        // Undo like
+        setLikes(likes - 1);
+        setUserReaction(null);
+    } else {
+        if (userReaction === 'dislike') {
+            setDislikes(dislikes - 1); // remove dislike
+        }
+        setLikes(userReaction === 'like' ? likes : likes + 1);
+        setDislikes(userReaction === 'dislike' ? dislikes - 1 : dislikes);
+        setUserReaction('like');
+    }
+};
+
+const handleDislike = () => {
+    if (userReaction === 'dislike') {
+        // Undo dislike
+        setDislikes(dislikes - 1);
+        setUserReaction(null);
+    } else {
+        if (userReaction === 'like') {
+            setLikes(likes - 1); // remove like
+        }
+        setDislikes(userReaction === 'dislike' ? dislikes : dislikes + 1);
+        setLikes(userReaction === 'like' ? likes - 1 : likes);
+        setUserReaction('dislike');
+    }
+};
+
   
     return (
         <>
@@ -49,7 +82,7 @@ function Video({sideNavbar}){
                         </div>
 
                         <div className="youtube_video_likeBlock">
-                            <div onClick={()=>setLikes(likes + 1)} className="youtube_video_likeBlock_Like">
+                            {/* <div onClick={()=>setLikes(likes + 1)} className="youtube_video_likeBlock_Like">
                                 <PiThumbsUp /> 
                                 <div className="youtube_video_likeBlock_NoOfLikes">{likes}</div>
                             </div>
@@ -59,9 +92,20 @@ function Video({sideNavbar}){
                             <div onClick={()=>setDislikes(dislikes + 1)} className="youtube_video_likeBlock_Like">
                                 <PiThumbsDown />
                                 <div className="youtube_video_likeBlock_NoOfLikes">{dislikes}</div>
+                            </div> */}
+                            <div onClick={handleLike} className={`youtube_video_likeBlock_Like ${userReaction === 'like' ? 'active' : ''}`}>
+                                <PiThumbsUp />
+                                <div className="youtube_video_likeBlock_NoOfLikes">{likes}</div>
+                            </div>
+                            
+                            <div className="youtubeVideoDivider"></div>
+                            <div onClick={handleDislike} className={`youtube_video_likeBlock_Like ${userReaction === 'dislike' ? 'active' : ''}`}>
+                                <PiThumbsDown />
+                            <div className="youtube_video_likeBlock_NoOfLikes">{dislikes}</div>
                             </div>
 
                         </div>
+
                     </div>
 
                     <div className="youtube_video_About">

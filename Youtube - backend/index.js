@@ -15,6 +15,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// To check that API is running
+app.get('/', (req, res) => res.send('API is running ✅'));
+
 app.use('/api/auth', authRoutes);
 app.use('/api/videos', videoRoutes);
 app.use('/api/channels', channelRoutes);

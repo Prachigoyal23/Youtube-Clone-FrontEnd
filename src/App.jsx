@@ -7,13 +7,18 @@ import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import VideoUpload from './Pages/VideoUpload';
 import SignUp from './Pages/SignUp';
-// import Channel from './Pages/Channel';
+import axios from 'axios';
+
 import CreateChannel from './Pages/CreateChannel';
 import ViewChannel from './Pages/ViewChannel';
+// import HomePage from './Components/HomePage';
+
 
 function App () {
 
   const[sideNavbar, setSideNavbar] = useState(true);
+  // const [searchTerm, setSearchTerm] = useState("");
+ 
 
   const setSideNavbarFunc = (value) => {
     setSideNavbar(value)
@@ -22,6 +27,8 @@ function App () {
   return (
     <div className="App">
     <Navbar setSideNavbarFunc={setSideNavbarFunc} sideNavbar={sideNavbar} />
+    {/* <Navbar setSearchText={setSearchTerm} setSideNavbarFunc={setSideNavbar} sideNavbar={sideNavbar} />
+    <HomePage searchTerm={searchTerm} sideNavbar={sideNavbar} /> */}
     <Routes>
       <Route path='/' element={<Home sideNavbar={sideNavbar} />} />
       <Route path='/watch/:id' element={<Video sideNavbar={sideNavbar} />}></Route>

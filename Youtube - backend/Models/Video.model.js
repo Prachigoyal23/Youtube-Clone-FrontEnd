@@ -1,10 +1,24 @@
 import mongoose from 'mongoose';
 
 const VideoSchema = new mongoose.Schema({
-  videoId: String,
-  title: String,
-  thumbnailUrl: String,
-  description: String,
+  videoId: { 
+    type: String, 
+    required: true 
+  },
+  title: { 
+    type: String, 
+    required: true, 
+    trim: true 
+  },
+  thumbnailUrl: { 
+    type: String, 
+    required: true 
+  },
+  description: { 
+    type: String, 
+    required: true, 
+    trim: true 
+  },
   channelId: { type: mongoose.Schema.Types.ObjectId, ref: 'Channel' },
   uploader: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   views: {

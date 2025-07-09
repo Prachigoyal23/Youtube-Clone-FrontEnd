@@ -91,3 +91,18 @@ export const deleteVideo = async (req, res) => {
     res.status(500).json({ error: 'Failed to delete video' });
   }
 };
+
+// ---------------- Views on the video --------------------------
+export const incrementViews = async (req, res) => {
+  try {
+    const video = await Video.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { views: 1 } },
+      { new: true }
+    );
+    res.json(video);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to increment views' });
+  }
+};
+

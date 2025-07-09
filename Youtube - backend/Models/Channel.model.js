@@ -1,9 +1,19 @@
 import mongoose from 'mongoose';
 
 const ChannelSchema = new mongoose.Schema({
-  channelName: String,
+  channelName: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    minlength: [3, 'Channel name must be at least 3 characters']
+  },
   owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  description: String,
+  description: {
+    type: String,
+    required: true,
+    trim: true
+  },
   channelBanner: String,
   subscribers: {
     type: Number,

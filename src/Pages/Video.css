@@ -252,3 +252,13 @@
     color: #ffffff9c;
     font-size: 12px;
 }
+
+
+.youtube_video_likeBlock_Like.active {
+    color: #0a84ff;
+    font-weight: bold;
+}
+
+
+/* Three dot edit and delete comment */
+
