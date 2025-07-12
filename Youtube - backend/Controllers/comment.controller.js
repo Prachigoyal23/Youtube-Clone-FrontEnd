@@ -1,42 +1,51 @@
-import Comment from '../Models/Comment.model.js';
-import Video from '../Models/Video.model.js';
+import CommentModel from '../Models/Comment.model.js';
+import VideoModel from '../Models/Video.model.js';
 
+// -------------------To add a Comment -----------------------------
 export const addComment = async (req, res) => {
   const { videoId, text } = req.body;
 
   try {
-    const newComment = await Comment.create({
-      videoId,
-      userId: req.user,
+    const comment = await CommentModel.create({
+      video: videoId,
+      user: req.user.id,
       text
     });
 
-    await Video.findByIdAndUpdate(videoId, {
-      $push: { comments: newComment._id }
+    await VideoModel.findByIdAndUpdate(videoId, {
+      $push: { comments: comment._id }
     });
+    // const populatedComment = await comment.populate('user', 'username avatar');
 
-    res.status(201).json(newComment);
+    res.status(201).json(comment);
   } catch (err) {
-    console.log(`Error`, err);
-    res.status(500).json({ error: 'Failed to add comment' });
+    console.error('Error:', err); // This will log the stack trace
+    res.status(500).json({ error: err.message, stack: err.stack });
   }
 };
 
-export const getComments = async (req, res) => {
+// ------------- To fetch the comment by Video Id------------------------------
+export const getCommentsByVideo = async (req, res) => {
   try {
-    const comments = await Comment.find({ videoId: req.params.videoId }).populate('userId');
+    const comments = await CommentModel.find({ video: req.params.videoId }).populate('user', 'username avatar');
     res.json(comments);
   } catch (err) {
     res.status(500).json({ error: 'Failed to get comments' });
   }
 };
 
-export const updateComment = async (req, res) => {
+// -------------------- To edit the comment--------------------------
+export const editComment = async (req, res) => {
   try {
-    const comment = await Comment.findById(req.params.id);
+    const comment = await CommentModel.findById(req.params.id);
     if (!comment) return res.status(404).json({ error: 'Comment not found' });
 
-    if (comment.userId.toString() !== req.user)
+    // Debug
+    // console.log('comment.user:', comment.user, typeof comment.user);
+    // console.log('req.user.id:', req.user.id, typeof req.user.id);
+    // console.log('EQUAL?', comment.user && req.user.id && (comment.user.toString() === req.user.id.toString()));
+
+    if (!comment.user || comment.user.toString() !== req.user.id.toString())
       return res.status(403).json({ error: 'Unauthorized' });
 
     comment.text = req.body.text || comment.text;
@@ -48,15 +57,20 @@ export const updateComment = async (req, res) => {
   }
 };
 
+// ------------------- To Delete the comment--------------------------
 export const deleteComment = async (req, res) => {
   try {
-    const comment = await Comment.findById(req.params.id);
+    const comment = await CommentModel.findById(req.params.id);
     if (!comment) return res.status(404).json({ error: 'Comment not found' });
 
-    if (comment.userId.toString() !== req.user)
+    if (!comment.user || !comment.user.equals(req.user.id))
       return res.status(403).json({ error: 'Unauthorized' });
 
-    await Comment.findByIdAndDelete(req.params.id);
+    await VideoModel.findByIdAndUpdate(comment.video, {
+      $pull: { comments: comment._id }
+    });
+
+    await CommentModel.findByIdAndDelete(comment._id);
     res.json({ message: 'Comment deleted' });
   } catch (err) {
     res.status(500).json({ error: 'Failed to delete comment' });

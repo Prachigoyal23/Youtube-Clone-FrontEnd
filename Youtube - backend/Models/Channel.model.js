@@ -14,13 +14,17 @@ const ChannelSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  channelPic: {
+    type: String
+  },
   channelBanner: String,
   subscribers: {
     type: Number,
     default: 0
   },
   videos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Video' }]
-});
+},
+{ timestamps: true });
 
-const Channel = mongoose.model('Channel', ChannelSchema);
-export default Channel;
+const ChannelModel = mongoose.model('Channel', ChannelSchema);
+export default ChannelModel;

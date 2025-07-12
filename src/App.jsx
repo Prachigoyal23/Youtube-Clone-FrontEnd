@@ -1,45 +1,48 @@
+import React, { useState } from 'react'
+import Header from './Components/Header.jsx'
+import Sidebar from './Components/Sidebar.jsx'
 import './App.css'
-import Navbar from './Components/Navbar';
-import Home from './Pages/Home';
-import Video from './Pages/Video';
-import Profile from './Pages/Profile';
-import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import VideoUpload from './Pages/VideoUpload';
-import SignUp from './Pages/SignUp';
-import axios from 'axios';
+import { Outlet } from 'react-router-dom'
 
-import CreateChannel from './Pages/CreateChannel';
-import ViewChannel from './Pages/ViewChannel';
-// import HomePage from './Components/HomePage';
+function App() {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [searchedVal, setSearchedVal] = useState("");
+    const [searchActive, setSearchActive] = useState(false);
 
+    // Calculate left margin based on sidebar state
+    const mainContentStyle = {
+        marginLeft: sidebarOpen ? 220 : 72,
+        transition: 'margin-left 0.2s cubic-bezier(.4,0,.2,1)'
+    };
 
-function App () {
+    // Called when search button is clicked
+    const handleSearch = () => {
+        setSearchActive(true);
+    };
 
-  const[sideNavbar, setSideNavbar] = useState(true);
-  // const [searchTerm, setSearchTerm] = useState("");
- 
-
-  const setSideNavbarFunc = (value) => {
-    setSideNavbar(value)
-  }
-
-  return (
-    <div className="App">
-    <Navbar setSideNavbarFunc={setSideNavbarFunc} sideNavbar={sideNavbar} />
-    {/* <Navbar setSearchText={setSearchTerm} setSideNavbarFunc={setSideNavbar} sideNavbar={sideNavbar} />
-    <HomePage searchTerm={searchTerm} sideNavbar={sideNavbar} /> */}
-    <Routes>
-      <Route path='/' element={<Home sideNavbar={sideNavbar} />} />
-      <Route path='/watch/:id' element={<Video sideNavbar={sideNavbar} />}></Route>
-      <Route path='/user/:id' element={<Profile sideNavbar={sideNavbar} />} ></Route>
-      <Route path='/:id/upload' element={<VideoUpload/>} ></Route>
-      <Route path='/signup' element={<SignUp/>}></Route>
-      <Route path="/create-channel" element={<CreateChannel />} />
-      <Route path="/channel" element={<ViewChannel />} />
-    </Routes>
-    </div>
-  )
+    return (
+        <>
+            <Header
+                sidebarOpen={sidebarOpen}
+                setSidebarOpen={setSidebarOpen}
+                searchedVal={searchedVal}
+                setSearchedVal={setSearchedVal}
+                onSearch={handleSearch}
+            />
+            <div className="app-layout">
+                <Sidebar sidebarOpen={sidebarOpen} />
+                <div className="main-content" style={mainContentStyle}>
+                    <Outlet context={{
+                        sidebarOpen,
+                        searchedVal,
+                        setSearchedVal,
+                        searchActive,
+                        setSearchActive
+                    }} />
+                </div>
+            </div>
+        </>
+    )
 }
 
-export default App;
+export default App

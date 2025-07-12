@@ -1,12 +1,13 @@
 import express from 'express';
-import { registerUser, loginUser } from '../Controllers/user.controller.js';
+import { registerUser, loginUser, getUserProfile } from '../Controllers/user.controller.js';
 
-const router = express.Router();
+function userRoutes(app) {
+    app.post('/api/register', registerUser);
+    app.post('/api/login', loginUser);
+    app.get('/api/profile', getUserProfile); // protected (it requires JWT token)
+}
 
-router.post('/register', registerUser);
-router.post('/login', loginUser);
-
-export default router;
+export default userRoutes;
 
 
 

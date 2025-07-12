@@ -1,4 +1,4 @@
-import User from '../Models/User.model.js';
+import UserModel from '../Models/User.model.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -9,6 +9,7 @@ const isStrongPassword = (password) => {
   return strongPasswordRegex.test(password);
 };
 
+// ---------------- To Sign Up the User Account-------------------------------
 export const registerUser = async (req, res) => {
   const { username, email, password, avatar } = req.body;
 
@@ -31,16 +32,14 @@ export const registerUser = async (req, res) => {
 
   try {
     // Check if email already exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await UserModel.findOne({ email });
     if (existingUser){
       return res.status(400).json({ error: 'Email already in use' });
     }
       
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create new user
-    const newUser = await User.create({
+    const newUser = await UserModel.create({
       username,
       email,
       password: hashedPassword,
@@ -50,7 +49,7 @@ export const registerUser = async (req, res) => {
     // await newUser.save();
 
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-      expiresIn: '1d'
+      expiresIn: '4d'
     });
 
     res.status(201).json({
@@ -62,29 +61,13 @@ export const registerUser = async (req, res) => {
         email: newUser.email,
         }
      });
-
-    // res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     console.error('Registration error:', error);
     res.status(500).json({ error: 'Server error during registration' });
   }
-  
-
-  // try {
-  //   const hashedPassword = await bcrypt.hash(password, 10);
-  //   const newUser = await User.create({
-  //     username,
-  //     email,
-  //     password: hashedPassword
-  //   });
-
-  //   res.status(201).json(newUser);
-  // } catch (error) {
-  //    console.error('Registration error:', error);
-  //   res.status(500).json({ error: 'Registration failed' });
-  // }
 };
 
+// ------------------ To Login the Account -----------------------------------------
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -92,14 +75,14 @@ export const loginUser = async (req, res) => {
   if (!password) return res.status(400).json({ error: 'Password is required' });
 
   try {
-    const user = await User.findOne({ email });
+    const user = await UserModel.findOne({ email });
     if (!user) return res.status(400).json({ error: 'User not found' });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '7d'
+      expiresIn: '5d'
     });
 
     res.json({ token, user: {
@@ -111,4 +94,21 @@ export const loginUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Login failed' });
   }
+};
+
+// --------------- To fetch the user's profile------------------------------
+export const getUserProfile = async (req, res) => {
+    try {
+        const user = await UserModel.findById(req.user.id).populate("channel");
+        res.json({
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            avatar: user.avatar,
+            channelId: user.channel ? user.channel._id.toString() : null,
+        });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ message: "Server Error" });
+    }
 };

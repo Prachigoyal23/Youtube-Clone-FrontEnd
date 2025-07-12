@@ -1,0 +1,129 @@
+.login-container {
+    min-height: 90vh;
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background: #f9f9f9; */
+}
+
+.user-form {
+    background-color: #222;
+    border-radius: 10px;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.4), /* deeper shadow for depth */
+        0 0 10px rgba(255, 255, 255, 0.1), /* soft outer glow */
+        0 0 20px rgba(94, 89, 92, 0.3); 
+    padding: 2.5rem 2.2rem 2.5rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 400px;
+}
+
+.user-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ccc;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.user-form label {
+    font-size: 1rem;
+    color: #ccc;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+}
+
+.user-form input {
+    padding: 0.7rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background: #f9f9f9;
+    outline: none;
+    margin-bottom: 0.7rem;
+    transition: border 0.18s;
+}
+
+.user-form input:focus {
+    border: 1.5px solid red;
+    background: #fff;
+}
+
+.user-btn {
+    background: rgb(254, 72, 72);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 0.7rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.user-btn:hover {
+    background: red;
+}
+
+.user-switch {
+    text-align: center;
+    margin-top: 0.7rem;
+    font-size: 0.97rem;
+    color: #606060;
+}
+
+.user-link {
+    color: rgb(254, 72, 72);
+    cursor: pointer;
+    font-weight: 500;
+    margin-left: 0.2rem;
+    text-decoration: underline;
+}
+
+.header-login-link {
+    display: inline-block;
+    padding: 0.4rem 1.2rem;
+    margin-left: 0.7rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    /* color: #065fd4; */
+    /* color: rgb(254, 72, 72); */
+    /* background: #fff; */
+    background: rgb(254, 72, 72);
+    color: #fff;
+    /* border: 1px solid #065fd4; */
+    border: 1px solid rgb(254, 72, 72);
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s, border 0.15s;
+}
+
+.header-login-link.signup {
+    /* color: #fff;
+    background: #065fd4; */
+    background: rgb(254, 72, 72);
+    color: #fff;
+    border: 1px solid rgb(254, 72, 72);
+    /* border: 1px solid #065fd4; */
+}
+
+.header-login-link:hover {
+    /* background: #174ea6; */
+    background: red;
+    color: #fff;
+    /* border-color: #174ea6; */
+    border-color: red;
+}
+
+@media (max-width: 500px) {
+    .user-form {
+        min-width: 0;
+        width: 95vw;
+        padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+    }
+}

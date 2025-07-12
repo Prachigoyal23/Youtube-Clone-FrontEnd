@@ -1,0 +1,146 @@
+.create-channel-modal-bg {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-channel-modal {
+    background: #222;
+    border-radius: 18px;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.4), /* deeper shadow for depth */
+        0 0 10px rgba(255, 255, 255, 0.1), /* soft outer glow */
+        0 0 20px rgba(94, 89, 92, 0.3); 
+    min-width: 350px;
+    max-width: 400px;
+    width: 100%;
+    padding: 2.2rem 2.2rem 1.5rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.18s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.create-channel-title {
+    color: #fff;
+    margin-bottom: 1.2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.create-channel-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-channel-avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.2rem;
+}
+
+.create-channel-avatar {
+    width: 84px;
+    height: 84px;
+    border-radius: 100%;
+    background: #eee;
+    object-fit: cover;
+    margin-bottom: 0.7rem;
+}
+
+.create-channel-fields {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* margin-bottom: 1.2rem; */
+}
+
+.create-channel-label {
+    font-size: 1rem;
+    color: #eee;
+    margin-bottom: 0.1rem;
+}
+
+.create-channel-input {
+    width: 90%;
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background: #f9f9f9;
+    outline: none;
+    margin-bottom: 0.5rem;
+    transition: border 0.18s;
+    resize: none;
+}
+
+.create-channel-input:focus {
+    border: 1.5px solid #065fd4;
+    background: #fff;
+}
+
+.create-channel-actions {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 0.7rem;
+    margin-bottom: 0.5rem;
+}
+
+.create-channel-cancel {
+    background: rgb(223, 105, 105);
+    border: none;
+    color: #fff;
+    font-size: 1.05rem;
+    cursor: pointer;
+    padding: 0.5rem 1.2rem;
+    border-radius: 10px;
+    transition: background 0.13s;
+}
+
+.create-channel-cancel:hover {
+    background: red;
+    color: #222;
+}
+
+.create-channel-submit {
+    background: rgb(1, 83, 1);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.5rem 1.2rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.create-channel-submit:disabled {
+    /* background: #b3d3fa; */
+    background: rgb(99, 231, 99);
+    color: #fff;
+    cursor: not-allowed;
+}
+
+
+@media (max-width: 600px) {
+    .create-channel-modal {
+        min-width: 0;
+        max-width: 98vw;
+        padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+    }
+}

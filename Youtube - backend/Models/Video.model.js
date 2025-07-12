@@ -3,50 +3,53 @@ import mongoose from 'mongoose';
 const VideoSchema = new mongoose.Schema({
   videoId: { 
     type: String, 
-    required: true 
   },
   title: { 
     type: String, 
     required: true, 
     trim: true 
   },
-  thumbnailUrl: { 
+  thumbnail: { 
     type: String, 
-    required: true 
   },
   description: { 
     type: String, 
     required: true, 
     trim: true 
   },
-  channelId: { type: mongoose.Schema.Types.ObjectId, ref: 'Channel' },
-  uploader: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  channel: { type: mongoose.Schema.Types.ObjectId, ref: 'Channel'},
+  uploader: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   views: {
     type: Number,
     default: 0
   },
-  // likes: {
-  //   type: Number,
-  //   default: 0
-  // },
-  // dislikes: {
-  //   type: Number,
-  //   default: 0
-  // },
-  likes: [{ 
-    type: mongoose.Types.ObjectId, 
-    ref: 'User' 
-  }],
-dislikes: [{ 
-  type: mongoose.Types.ObjectId, 
-  ref: 'User' 
-}],
+  likes: {
+    type: Number,
+    default: 0
+  },
+  dislikes: {
+    type: Number,
+    default: 0
+  },
+  likedBy:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }],
+    dislikedBy:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }],
   uploadDate: {
     type: Date,
     default: Date.now
   },
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
-});
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+  videoLink: { 
+        type: String, 
+        required: true 
+    },
+    category: String ,
+}, { timestamps: true });
 
-const Video = mongoose.model('Video', VideoSchema);
-export default Video;
+const VideoModel = mongoose.model('Video', VideoSchema);
+export default VideoModel;

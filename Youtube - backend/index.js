@@ -1,34 +1,38 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import connectDB from './config/db.js';
+import mongoose from 'mongoose';
 
-import authRoutes from './Routes/user.route.js';
+
 import videoRoutes from './Routes/video.route.js';
 import channelRoutes from './Routes/channel.route.js';
 import commentRoutes from './Routes/comment.route.js';
+import userRoutes from './Routes/user.route.js';
 
 dotenv.config();
-connectDB();
-
 const app = express();
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+    console.log(`server is running at port: ${PORT}`);
+});
+
+// cors is used for integration from backend to frontend
 app.use(cors({
     origin: "*",
     credentials: true,
 }));
+
 app.use(express.json());
 
-// To check that API is running
-app.get('/', (req, res) => res.send('API is running ✅'));
+userRoutes(app)
+videoRoutes(app);
+commentRoutes(app);
+channelRoutes(app);
 
-app.use('/api/auth', authRoutes);
-app.use('/api/videos', videoRoutes);
-app.use('/api/channels', channelRoutes);
-app.use('/api/comments', commentRoutes);
+app.get('/', (req, res) => {
+  res.send('API is running ✅');
+});
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
-
-
+mongoose.connect(process.env.MONGO_URI)
+.then(()=>console.log('MongoDB is Connected ✅'))
+.catch(err=>console.log('DataBase is not Connected ❌'));

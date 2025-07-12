@@ -21,14 +21,22 @@ const userSchema = new mongoose.Schema({
     },
     avatar:{
         type:String,
-        default:"https://cdn.pixabay.com/photo/2014/04/02/17/07/user-307993_640.png"
     },
-    channels: [{ 
+    channel: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Channel' 
+    }],
+    likedVideos: {
+        type: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Video' } ],
+        default: []
+    },
+
+    subscribedChannels: [{ 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Channel' 
     }]
 
-});
+}, { timestamps: true });
 
-const User = mongoose.model("User", userSchema)
-export default User;
+const UserModel = mongoose.model("User", userSchema)
+export default UserModel;
