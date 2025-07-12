@@ -137,10 +137,3 @@
 }
 
 
-@media (max-width: 600px) {
-    .create-channel-modal {
-        min-width: 0;
-        max-width: 98vw;
-        padding: 1.2rem 0.7rem 1.2rem 0.7rem;
-    }
-}

@@ -120,10 +120,29 @@
     border-color: red;
 }
 
-@media (max-width: 500px) {
+/* @media (max-width: 500px) {
     .user-form {
         min-width: 0;
         width: 95vw;
         padding: 1.2rem 0.7rem 1.2rem 0.7rem;
     }
+} */
+
+/* Responsive styles for login/register/user forms */
+@media (max-width: 600px) {
+  .login-container {
+    min-height: 80vh;
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+  }
+  .header-login-link {
+    font-size: 0.95rem;
+    padding: 0.3rem 0.7rem;
+    margin-left: 0.3rem;
+  }
 }
+
+
+
+
+
