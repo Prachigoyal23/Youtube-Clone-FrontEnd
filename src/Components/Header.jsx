@@ -57,7 +57,6 @@ function Header({ sidebarOpen, setSidebarOpen, searchedVal, setSearchedVal, onSe
             return;
         }
         try {
-            // user is available from context
             await axios.post(
                 "http://localhost:4000/api/video",
                 trimmed,

@@ -3,30 +3,3 @@
   margin: 0px;
   box-sizing: border-box;
 }
-
-/* Default dark theme */
-
-/* Light theme */
-.light-theme .app-layout,
-.light-theme .header,
-.light-theme .sideBar,
-.light-theme .main-content,
-.light-theme .channel-page,
-.light-theme .video-player-page,
-.light-theme .create-channel-modal-bg,
-.light-theme .create-channel-modal,
-.light-theme .edit-channel-modal-bg,
-.light-theme .edit-channel-modal,
-.light-theme .channel-banner-container,
-.light-theme .channel-header,
-.light-theme .channel-tabs,
-.light-theme .channel-videos-list,
-.light-theme .video,
-.light-theme .videoList,
-.light-theme .login-container,
-.light-theme .user-form,
-.light-theme .watch-later-page {
-  background: #333333 !important;
-  color: #fff !important;
-}
-
