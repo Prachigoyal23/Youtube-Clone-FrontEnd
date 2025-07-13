@@ -60,67 +60,67 @@ Demo Video : https://drive.google.com/file/d/17Q1t9Px8FKOy5pDWjliy-NUfT9cPnIhV/v
 
 ## 📂 Folder Structure
 
-   .
-   ├── node_modules/
-   ├── public/
-   ├── src/
-   │   ├── assets/
-   │   ├── Components/
-   |   |   ├── CreateChannel.jsx
-   |   |   ├── Header.jsx
-   |   |   ├── Sidebar.jsx
-   |   |   ├── UserModal.jsx
-   |   |   ├── Video.jsx
-   |   |   ├── Videolist.jsx
-   |   |   ├──ViewChannel.jsx
-   │   ├── Context/
-   |   |   ├── AuthContext.js
-   |   |   ├── DefaultVideo.js
-   │   ├── CSS/
-   |   |   ├── Channel.css
-   |   |   ├── CreateChannel.css
-   |   |   ├── HomePage.css
-   |   |   ├── Login.css
-   |   |   ├── Modal.css
-   |   |   ├── NotFound.css
-   |   |   ├── Video.css
-   │   ├── Pages/
-   |   |   ├── Channel.jsx
-   |   |   ├── Channels.jsx
-   |   |   ├── HomePage.jsx
-   |   |   ├── Login.jsx
-   |   |   ├── NotFound.jsx
-   |   |   ├── Register.jsx
-   |   |   ├── VideoPage.jsx
-   │   ├── App.css
-   │   ├── App.jsx
-   │   ├── index.css
-   │   ├── main.jsx
-   ├── Youtube - backend/
-   |   ├──Controllers/
-   |   |   ├── channel.controller.js
-   |   |   ├── comment.controller.js
-   |   |   ├── user.controller.js
-   |   |   ├──video.controller.js
-   |   ├──middleware/
-   |   |   ├── authMiddleware.js
-   |   ├──Models
-   |   |   ├── Channel.model.js
-   |   |   ├── Comment.model.js
-   |   |   ├── User.model.js
-   |   |   ├──Video.model.js 
-   |   ├──Routes/
-   |   |   ├── channel.route.js
-   |   |   ├── comment.route.js
-   |   |   ├── user.route.js
-   |   |   ├──video.route.js
-   ├── .gitignore
-   ├── eslint.config.js
-   ├── index.html
-   ├── package-lock.json
-   ├── package.json
-   ├── README.md
-   └── vite.config.js
+      .
+      ├── node_modules/
+      ├── public/
+      ├── src/
+      │   ├── assets/
+      │   ├── Components/
+      |   |   ├── CreateChannel.jsx
+      |   |   ├── Header.jsx
+      |   |   ├── Sidebar.jsx
+      |   |   ├── UserModal.jsx
+      |   |   ├── Video.jsx
+      |   |   ├── Videolist.jsx
+      |   |   ├──ViewChannel.jsx
+      │   ├── Context/
+      |   |   ├── AuthContext.js
+      |   |   ├── DefaultVideo.js
+      │   ├── CSS/
+      |   |   ├── Channel.css
+      |   |   ├── CreateChannel.css
+      |   |   ├── HomePage.css
+      |   |   ├── Login.css
+      |   |   ├── Modal.css
+      |   |   ├── NotFound.css
+      |   |   ├── Video.css
+      │   ├── Pages/
+      |   |   ├── Channel.jsx
+      |   |   ├── Channels.jsx
+      |   |   ├── HomePage.jsx
+      |   |   ├── Login.jsx
+      |   |   ├── NotFound.jsx
+      |   |   ├── Register.jsx
+      |   |   ├── VideoPage.jsx
+      │   ├── App.css
+      │   ├── App.jsx
+      │   ├── index.css
+      │   ├── main.jsx
+      ├── Youtube - backend/
+      |   ├──Controllers/
+      |   |   ├── channel.controller.js
+      |   |   ├── comment.controller.js
+      |   |   ├── user.controller.js
+      |   |   ├──video.controller.js
+      |   ├──middleware/
+      |   |   ├── authMiddleware.js
+      |   ├──Models
+      |   |   ├── Channel.model.js
+      |   |   ├── Comment.model.js
+      |   |   ├── User.model.js
+      |   |   ├──Video.model.js 
+      |   ├──Routes/
+      |   |   ├── channel.route.js
+      |   |   ├── comment.route.js
+      |   |   ├── user.route.js
+      |   |   ├──video.route.js
+      ├── .gitignore
+      ├── eslint.config.js
+      ├── index.html
+      ├── package-lock.json
+      ├── package.json
+      ├── README.md
+      └── vite.config.js
 
 
 ---
