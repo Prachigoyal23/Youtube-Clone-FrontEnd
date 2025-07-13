@@ -27,7 +27,7 @@ function Register() {
 
         // Validate required fields
         if (!username || !email || !password) {
-            alert("Please fill all required fields without empty space.");
+            alert("Please fill all required fields.");
             return;
         }
 

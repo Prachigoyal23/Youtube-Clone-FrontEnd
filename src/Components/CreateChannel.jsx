@@ -74,7 +74,6 @@ function CreateChannel() {
                             value={form.channelPic}
                             onChange={handleChange}
                             className="create-channel-input"
-                            style={{ marginTop: "0.7rem" }}
                         />
                     </div>
                     <div className="create-channel-fields">

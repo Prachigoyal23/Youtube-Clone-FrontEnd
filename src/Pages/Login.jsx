@@ -32,8 +32,7 @@ function Login() {
                 }
             );
 
-            // Backend response includes: _id, username, email, avatar, token
-            setUser(data); // This will trigger useEffect to store it in localStorage
+            setUser(data);
             navigate("/");
 
         } catch (err) {

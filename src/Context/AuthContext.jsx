@@ -15,7 +15,6 @@ export const AuthProvider = ({ children }) => {
         const storedUser = localStorage.getItem("user");
         if (storedUser) {
             const parsed = JSON.parse(storedUser);
-            // Normalize: always use channelId, never channel
             if (parsed.channel && !parsed.channelId) {
                 parsed.channelId = typeof parsed.channel === "object" && parsed.channel?._id
                     ? parsed.channel._id
