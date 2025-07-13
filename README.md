@@ -167,7 +167,7 @@ Demo Video : https://drive.google.com/file/d/17Q1t9Px8FKOy5pDWjliy-NUfT9cPnIhV/v
 
 5. Run backend (in new terminal)
   
-  ```bash
+   ```bash
    cd Youtube-backend
    npm start
 
