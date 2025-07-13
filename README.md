@@ -162,7 +162,7 @@ Demo Video : https://drive.google.com/file/d/17Q1t9Px8FKOy5pDWjliy-NUfT9cPnIhV/v
 
 4. Run frontend
 
-  ```bash
+   ```bash
    npm run dev
 
 5. Run backend (in new terminal)
