@@ -52,7 +52,7 @@ function Register() {
             navigate("/login");
 
         } catch (err) {
-            // console.error("❌ Registration failed:", err.response?.data?.message || err.message);
+            // console.error(" Registration failed:", err.response?.data?.message || err.message);
             toast.error("Registration failed: " + (err.response?.data?.message || "Something went wrong"));
         }
     };

@@ -33,7 +33,7 @@ function CreateChannel() {
         e.preventDefault();
         // If user is not logged in, show error and return
         if (!user) {
-            toast.error("You must be logged in to create a channel.");
+            toast.error("Login required to create a channel.");
             return;
         }
         setLoading(true);
