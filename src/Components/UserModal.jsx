@@ -24,7 +24,7 @@ function UserModal({ onClose, setShowModal }) {
         setUser(null);
     };
 
-    if (!user) return null; // <-- Safeguard if user is null
+    if (!user) return null;
 
     return (
         <div className="user-modal-container" onClick={onClose}>

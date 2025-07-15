@@ -10,6 +10,7 @@ import '../CSS/Login.css'
 import UserModal from './UserModal.jsx'
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import OnlineStatus from './OnlineStatus.jsx';
 
 function Header({ sidebarOpen, setSidebarOpen, searchedVal, setSearchedVal, onSearch }) {
     const { user, setUser } = useAuth(); // get user from context
@@ -94,6 +95,7 @@ function Header({ sidebarOpen, setSidebarOpen, searchedVal, setSearchedVal, onSe
                     <input placeholder="Search..." onChange={handleSearchInput} value={searchedVal} />
                     <button onClick={handleSearchBtn}><CiSearch /></button>
                 </div>
+                <OnlineStatus/>
                 <div className='right'>
 
                     {user ? (

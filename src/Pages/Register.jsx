@@ -48,7 +48,7 @@ function Register() {
                 }
             );
 
-            toast.success("✅ User registered successfully, Please LogIn your Account.");
+            toast.success("✅ User registered successfully, Please Log In your Account.");
             navigate("/login");
 
         } catch (err) {

@@ -276,10 +276,10 @@ function ViewChannel() {
 
       {/* Upload Modal */}
       {showUpload && (
-        <div className="create-channel-modal-bg" style={{ zIndex: 3000 }}>
-          <div className="create-channel-modal" style={{ maxWidth: 500 }}>
-            <h2 className="create-channel-title">Upload Video</h2>
-            <form className="create-channel-form" onSubmit={handleUploadSubmit}>
+        <div className="CreateChannelModalBg" style={{ zIndex: 3000 }}>
+          <div className="CreateChannelModal" style={{ maxWidth: 500 }}>
+            <h2 className="CreateChannelTitle">Upload Video</h2>
+            <form className="CreateChannelForm" onSubmit={handleUploadSubmit}>
               <div className="create-channel-fields">
                 <label className="create-channel-label">Title</label>
                 <input
@@ -355,10 +355,10 @@ function ViewChannel() {
 
       {/* Edit Modal */}
       {showEdit && (
-        <div className="create-channel-modal-bg" style={{ zIndex: 3000 }}>
-          <div className="create-channel-modal" style={{ maxWidth: 500 }}>
-            <h2 className="create-channel-title">Edit Video</h2>
-            <form className="create-channel-form" onSubmit={handleEditSubmit}>
+        <div className="CreateChannelModalBg" style={{ zIndex: 3000 }}>
+          <div className="CreateChannelModal" style={{ maxWidth: 500 }}>
+            <h2 className="CreateChannelTitle">Edit Video</h2>
+            <form className="CreateChannelForm" onSubmit={handleEditSubmit}>
               <div className="create-channel-fields">
                 <label className="create-channel-label">Title</label>
                 <input

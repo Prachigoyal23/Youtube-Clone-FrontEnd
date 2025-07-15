@@ -57,10 +57,10 @@ function CreateChannel() {
     };
 
     return (
-        <div className="create-channel-modal-bg">
-            <div className="create-channel-modal">
-                <h2 className="create-channel-title">Create Your Channel</h2>
-                <form className="create-channel-form" onSubmit={handleSubmit}>
+        <div className="CreateChannelModalBg">
+            <div className="CreateChannelModal">
+                <h2 className="CreateChannelTitle">Create Your Channel</h2>
+                <form className="CreateChannelForm" onSubmit={handleSubmit}>
                     <div className="create-channel-avatar-section">
                         <img
                             src={form.channelPic || "https://www.shutterstock.com/image-vector/person-gray-photo-placeholder-woman-600nw-1241538838.jpg"}
