@@ -30,10 +30,10 @@ function UserModal({ onClose, setShowModal }) {
         <div className="user-modal-container" onClick={onClose}>
             <div className="user-modal" onClick={e => e.stopPropagation()}>
                 <div className="user-modal-header">
-                    <img src={user.user.avatar} alt={user.user.username || 'User'} className="user-modal-avatar" />
+                    <img src={user?.user?.avatar} alt={user?.user?.username || 'User'} className="user-modal-avatar" />
                     <div className="user-modal-info">
-                        <div className="user-modal-username">{user.user.username || 'Guest'}</div>
-                        <div className="user-modal-email">{user.user.email || 'No email'}</div>
+                        <div className="user-modal-username">{user?.user?.username || 'Guest'}</div>
+                        <div className="user-modal-email">{user?.user?.email || 'No email'}</div>
                         {user.channelId ? (
                             <span className="user-modal-link" onClick={handleViewChannel}>View your channel</span>
                         ) : (
