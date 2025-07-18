@@ -18,7 +18,7 @@ app.listen(PORT, () => {
 
 // cors is used for integration from backend to frontend
 app.use(cors({
-    origin: "*",
+    origin: "http://localhost:5173",
     credentials: true,
 }));
 

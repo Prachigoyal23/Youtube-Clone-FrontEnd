@@ -101,7 +101,7 @@ function Header({ sidebarOpen, setSidebarOpen, searchedVal, setSearchedVal, onSe
                     {user ? (
                         <>
                             <img
-                                src={user.user.avatar}
+                                src={user?.user?.avatar}
                                 alt="Profile"
                                 className="header-avatar"
                                 onClick={() => setShowModal(v => !v)}
